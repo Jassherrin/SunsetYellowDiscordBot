@@ -13,7 +13,8 @@ sad_words = ["sad", "depressed", "unhappy", "angry", "miserable", "depressing"]
 starter_encouragements = [
   "Cheer up!",
   "Hang in there.",
-  "You are a great person / bot!"
+  "You have got this.", "Oh no! Take a deep breath and calm down first. It is fine if you are feeling sad but if you feel like it is a problem, please remember that you are the bigger person!", "Life is better when you’re laughing.", "Stars can’t shine without darkness.", "Cheer up, tomorrow is another chance.","Stay Determined.","Tomorrow is another day.","You can do this. 00:00 is a new day. Stay determined till then. Look at how strong you are! Come on bud! You are at the home stretch!",
+  "You are a great person! Just believe in yourself bud!"
 ]
 
 if "responding" not in db.keys():
