@@ -11,10 +11,8 @@ from keep_alive import keep_alive
 from discord.ext import commands
 
 
-intents = discord.Intents.default(
-)  # Create a new instance of the default intents
-client = discord.Client(
-  intents=intents)  # Pass the intents argument when initializing the Client
+intents = discord.Intents.default()  # Create a new instance of the default intents
+client = discord.Client(intents=intents)  # Pass the intents argument when initializing the Client
 
 intents = discord.Intents.default()
 intents.messages = True
