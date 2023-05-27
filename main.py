@@ -5,19 +5,21 @@
 import discord
 import requests
 import json
+import os
 import random
 from replit import db
 from keep_alive import keep_alive
 from discord.ext import commands
 
-
-intents = discord.Intents.default()  # Create a new instance of the default intents
-client = discord.Client(intents=intents)  # Pass the intents argument when initializing the Client
+intents = discord.Intents.default(
+)  # Create a new instance of the default intents
+client = discord.Client(
+  intents=intents)  # Pass the intents argument when initializing the Client
 
 intents = discord.Intents.default()
 intents.messages = True
 bot = commands.Bot(command_prefix='', intents=intents)
-
+token = os.getenv('DISCORD_TOKEN')
 #client = discord.Client()
 starting = ["help", "Help", "start", "Start"]
 sad_words = [
@@ -490,4 +492,4 @@ async def on_message(message):
 
 
 keep_alive()
-client.run('OTMwMzA5MDY1MTU3MDAxMjg2.G7sLSC.oWv2rb1s_Ul2PJm2meEgcow-AuTF9smbJFv2IM')
+client.run(token)
