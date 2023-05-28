@@ -11,22 +11,22 @@ from replit import db
 from keep_alive import keep_alive
 from discord.ext import commands
 
-intents = discord.Intents.default(
-)  # Create a new instance of the default intents
-client = discord.Client(
-  intents=intents)  # Pass the intents argument when initializing the Client
-
-intents = discord.Intents.default()
-intents.messages = True
-bot = commands.Bot(command_prefix='', intents=intents)
+#intents = discord.Intents.default()  # Create a new instance of the default intents
+#client = discord.Client(intents=intents)  # Pass the intents argument when initializing the Client
 token = os.getenv('DISCORD_TOKEN')
+intents = discord.Intents.all()
+intents.messages = True
+#client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix='', intents=intents)
+
+
 #client = discord.Client()
 starting = ["help", "Help", "start", "Start"]
 sad_words = [
   "sad", "Sad", "unhappy", "Worry", "angry", "miserable", "moody", "Moody",
   "Cry", "cry", "Cries", "cries", "sadge", "Sadge", "rejection", "Rejection",
-  "rejected", "Rejected", "worry", "worried", "Worried", "Disappointed",
-  "disappointed"
+  "rejected", "Rejected","reject", "worry", "worried", "Worried", "Disappointed",
+  "disappointed", "anger","angrier"
 ]
 
 chanceBall = [
@@ -320,17 +320,17 @@ def delete_encouragment(index):
     db["encouragements"] = encouragements
 
 
-@client.event
+@bot.event
 async def on_ready():
-  print('We have logged in as {0.user}'.format(client))
+  print('We have logged in as {0.user}'.format(bot))
 
 
-@client.event
+@bot.event
 async def on_message(message):
-  if message.author == client.user:
+  if message.author == bot.user:
     return
 
-  msg = message.content
+  msg = message.content.lower()
   # Example
   # if msg.startswith('$inspire'):
   #   quote = get_quote()
@@ -347,12 +347,15 @@ async def on_message(message):
   #   await message.channel.send(quote)
 
   #IMPORTANT: Here's where all the commands are
+  
   if db["responding"]:
     options = starter_encouragements
     if "encouragements" in db.keys():
       options = options + db["encouragements"]
 
+    
     if any(word in msg for word in sad_words):
+      
       await message.channel.send(
         random.choice(options) + " " + random.choice(sweet_links))
 
@@ -416,6 +419,7 @@ async def on_message(message):
     # inline=False)
 
   await message.channel.send(embed=embed)
+  await bot.process_commands(message)
 
   #   # Red flags
   # if any(word in msg for word in red_flags):
@@ -492,4 +496,4 @@ async def on_message(message):
 
 
 keep_alive()
-client.run(token)
+bot.run(token)
